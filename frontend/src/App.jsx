@@ -5,7 +5,7 @@ import StartScreen from './components/StartScreen';
 import QuizScreen from './components/QuizScreen';
 import ResultsScreen from './components/ResultsScreen';
 
-const API_BASE_URL = '/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('start');
