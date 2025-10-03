@@ -2,10 +2,9 @@ const express = require('express');
 const Question = require('../models/Question');
 const router = express.Router();
 
-// Get all questions (without correct answers)
 router.get('/', async (req, res) => {
   try {
-    console.log('📥 Fetching questions from MongoDB...');
+    console.log('Fetching questions from MongoDB...');
     const questions = await Question.find({}, {
       question_text: 1,
       option_a: 1,
@@ -28,7 +27,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Submit answers and calculate score
 router.post('/submit', async (req, res) => {
   try {
     const { answers } = req.body;
@@ -40,7 +38,6 @@ router.post('/submit', async (req, res) => {
       });
     }
 
-    // Get all questions with correct answers
     const questions = await Question.find({}).sort({ createdAt: 1 });
     
     let score = 0;

@@ -5,23 +5,19 @@ const Question = require('../models/Question');
 
 describe('Questions API', () => {
   beforeAll(async () => {
-    // Connect to a test database
     await mongoose.connect(process.env.MONGODB_URI_TEST || 'mongodb://localhost:27017/quizapp_test');
   });
 
   beforeEach(async () => {
-    // Clear the database before each test
     await Question.deleteMany({});
   });
 
   afterAll(async () => {
-    // Close the database connection after all tests
     await mongoose.connection.close();
   });
 
   describe('GET /api/questions', () => {
     it('should return all questions without correct answers', async () => {
-      // Create test questions
       await Question.create([
         {
           question_text: 'Test Question 1',
@@ -47,7 +43,6 @@ describe('Questions API', () => {
       expect(response.body.success).toBe(true);
       expect(response.body.data).toHaveLength(2);
       
-      // Check that correct answers are not included
       response.body.data.forEach(question => {
         expect(question.correct_option).toBeUndefined();
         expect(question.question_text).toBeDefined();
@@ -58,7 +53,6 @@ describe('Questions API', () => {
 
   describe('POST /api/questions/submit', () => {
     it('should calculate score correctly', async () => {
-      // Create test questions
       const questions = await Question.create([
         {
           question_text: 'Test Question 1',
@@ -79,8 +73,8 @@ describe('Questions API', () => {
       ]);
 
       const answers = {
-        [questions[0]._id]: 'A', // Correct
-        [questions[1]._id]: 'C'  // Wrong
+        [questions[0]._id]: 'A', 
+        [questions[1]._id]: 'C'
       };
 
       const response = await request(app)

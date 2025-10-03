@@ -9,7 +9,7 @@ const QuizScreen = ({
   onRestartQuiz 
 }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(300); // 5 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(300); 
   const [timerActive, setTimerActive] = useState(true);
 
   const currentQuestion = questions[currentQuestionIndex];

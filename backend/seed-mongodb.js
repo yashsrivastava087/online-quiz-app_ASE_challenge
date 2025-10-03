@@ -2,7 +2,6 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const connectDB = require('./config/database');
 
-// Connect to database
 connectDB();
 
 const Question = require('./models/Question');
@@ -52,21 +51,18 @@ const sampleQuestions = [
 
 const seedDatabase = async () => {
   try {
-    // Clear existing questions
     await Question.deleteMany({});
-    console.log('🗑️  Cleared existing questions');
+    console.log('Cleared existing questions');
 
-    // Insert sample questions
     await Question.insertMany(sampleQuestions);
-    console.log('✅ Sample questions inserted successfully into MongoDB');
+    console.log('Sample questions inserted successfully into MongoDB');
 
-    console.log('🎉 MongoDB database seeded successfully!');
+    console.log('MongoDB database seeded successfully!');
     process.exit(0);
   } catch (error) {
-    console.error('❌ Error seeding database:', error);
+    console.error(' Error seeding database:', error);
     process.exit(1);
   }
 };
 
-// Wait for connection to establish
 setTimeout(seedDatabase, 2000);

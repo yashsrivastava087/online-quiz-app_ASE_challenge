@@ -5,7 +5,6 @@ import StartScreen from './components/StartScreen';
 import QuizScreen from './components/QuizScreen';
 import ResultsScreen from './components/ResultsScreen';
 
-// Use relative URL since we have proxy setup in package.json
 const API_BASE_URL = '/api';
 
 function App() {
@@ -13,10 +12,9 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
   const [quizResults, setQuizResults] = useState(null);
-  const [loading, setLoading] = useState(true); // Start with loading true
+  const [loading, setLoading] = useState(true); 
   const [error, setError] = useState('');
 
-  // Load questions on component mount
   useEffect(() => {
     loadQuestions();
   }, []);
